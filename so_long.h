@@ -20,13 +20,16 @@ typedef struct s_vars
     void *img_l3zwa;
     void *img_hait;
     void *img_ard;
+    void *img_coin;
     void *img_win;
     int width;
     int height;
     int player_x;
     int player_y;
     int fd;
+    int move_nb;
 }   t_vars;
+
 
 // get_next_line
 size_t	ft_strlen(const char *s);
@@ -53,9 +56,12 @@ int		check_borders(t_vars *game);
 int		close_window(t_vars *game);
 void	ft_exit(t_vars *game);
 void	ft_free_map(t_vars *game);
-int handle_key(int keycode, void *param);
 
 //img map
 void render_map( t_vars *game);
+
+//move
+void find_player(t_vars *game);
+int handle_key(int keycode, void *param);
 
 #endif

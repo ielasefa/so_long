@@ -9,7 +9,7 @@
 /*   Updated: 2024/12/02 18:12:44 by iel-asef         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long.h"
+//#include "so_long.h"
 #include "get_next_line.h"
 
 char	*ft_read(int fd, char *storage)
