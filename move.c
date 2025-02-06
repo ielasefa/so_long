@@ -3,6 +3,7 @@
 int handle_key(int keycode, void *param)
 {
    t_vars *game = (t_vars *)param;
+   
    if((keycode == 119 || keycode == 65362) 
        && game->map[game->player_y - 1][game->player_x] != '1')
    {

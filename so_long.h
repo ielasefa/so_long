@@ -9,7 +9,7 @@
 # include <mlx.h>
 
 # define ESC_KEY 65307
-
+#define TILE_SIZE 64
 typedef struct s_vars 
 {
     void *mlx;
@@ -28,6 +28,7 @@ typedef struct s_vars
     int player_y;
     int fd;
     int move_nb;
+    int word_coin;
 }   t_vars;
 
 
@@ -60,8 +61,10 @@ void	ft_free_map(t_vars *game);
 //img map
 void render_map( t_vars *game);
 
-//move
+//move 
 void find_player(t_vars *game);
 int handle_key(int keycode, void *param);
+void    cont_coin(t_vars *game);
+
 
 #endif

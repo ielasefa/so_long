@@ -73,14 +73,14 @@ int main(int ac, char **av)
        return 1;
    }
    
-   game.win = mlx_new_window(game.mlx, game.width * 50, game.height * 50, "So Long");
+   game.win = mlx_new_window(game.mlx, game.width * TILE_SIZE, game.height * TILE_SIZE, "So Long");
    if (!game.win)
    {
        printf("Error: ma qdertch n7ll l window\n");
        ft_exit(&game);
    }
-   game.img_player = mlx_xpm_file_to_image(game.mlx, "assets/player.xpm", &width, &height);
-   game.img_l3zwa = mlx_xpm_file_to_image(game.mlx, "assets/l3azwa.xpm", &width, &height);
+   game.img_player = mlx_xpm_file_to_image(game.mlx, "assets/cj.xpm", &width, &height);
+   game.img_l3zwa = mlx_xpm_file_to_image(game.mlx, "assets/player.xpm", &width, &height);
    game.img_hait = mlx_xpm_file_to_image(game.mlx, "assets/haiiiit.xpm", &width, &height);
    game.img_ard = mlx_xpm_file_to_image(game.mlx, "assets/lard.xpm", &width, &height);
    game.img_coin = mlx_xpm_file_to_image(game.mlx, "assets/icon_heart.xpm", &width, &height);
