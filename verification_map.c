@@ -1,22 +1,6 @@
 #include "so_long.h"
 
-
-/*
-static int	ft_count_chars(char c, char *str)
-{
-   int	count;
-
-   count = 0;
-   while (*str)
-   {
-   	if (*str == c)
-   		count++;
-   	str++;
-   }
-   return (count);
-}*/
-
-static int	ft_check_map_chars(t_vars *game, int *collect, int *ex, int *play)
+static int	ft_check_map_chars(t_vars *game, int *collect, int *ex, int* home ,int *play)
 {
    int	x;
    int	y;
@@ -37,6 +21,8 @@ static int	ft_check_map_chars(t_vars *game, int *collect, int *ex, int *play)
    		}
    		else if (game->map[x][y] == 'C')
    			(*collect)++;
+            else if (game->map[x][y] == 'H')
+   			(*home)++;
    		else if (game->map[x][y] != '1' && game->map[x][y] != '0')
    			return (0);
    	}
@@ -82,24 +68,42 @@ static int	ft_check_line(t_vars *game)
    return (1);
 }
 
-int	verification_map(t_vars *game)
+int verification_map(t_vars *game)
 {
-   int	collect;
-   int	exit;
-   int	player;
+    int collect = 0;
+    int exit = 0;
+    int player = 0;
+    int home = 0;
 
-   collect = 0;
-   exit = 0;
-   player = 0;
-   if (!game->map || !game->map[0])
-   	return (0);
-   game->player_x = -1;
-   game->player_y = -1;
-   if (!ft_check_map_chars(game, &collect, &exit, &player))
-   	return (0);
-   if (player != 1 || exit != 1 || collect < 1)
-   	return (0);
-   if (!ft_check_line(game) || !ft_check_borders(game))
-   	return (0);
-   return (1);
+    if (!game->map || !game->map[0])
+    {
+        printf("Error: Empty map\n");
+        return (0);
+    }
+
+    if (!ft_check_map_chars(game, &collect, &exit, &home, &player))
+    {
+        printf("Error: Invalid characters found\n");
+        return (0);
+    }
+
+    if (player != 1 || exit != 1 || home != 1 || collect < 1)
+    {
+        printf("Error: Wrong number of elements\n");
+        return (0);
+    }
+
+    if (!ft_check_line(game))
+    {
+        printf("Error: Lines have different lengths\n");
+        return (0);
+    }
+
+    if (!ft_check_borders(game))
+    {
+        printf("Error: Map borders are not walls\n");
+        return (0);
+    }
+
+    return (1);
 }

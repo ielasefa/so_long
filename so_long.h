@@ -22,6 +22,7 @@ typedef struct s_vars
     void *img_ard;
     void *img_coin;
     void *img_win;
+    void *img_home;
     int width;
     int height;
     int player_x;
@@ -29,6 +30,7 @@ typedef struct s_vars
     int fd;
     int move_nb;
     int word_coin;
+    int cont_coin;
 }   t_vars;
 
 
@@ -57,6 +59,7 @@ int		check_borders(t_vars *game);
 int		close_window(t_vars *game);
 void	ft_exit(t_vars *game);
 void	ft_free_map(t_vars *game);
+char	*ft_itoa(int n);
 
 //img map
 void render_map( t_vars *game);
@@ -65,6 +68,7 @@ void render_map( t_vars *game);
 void find_player(t_vars *game);
 int handle_key(int keycode, void *param);
 void    cont_coin(t_vars *game);
+void player_coin(t_vars *game);
 
 
 #endif

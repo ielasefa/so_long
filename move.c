@@ -10,7 +10,7 @@ int handle_key(int keycode, void *param)
        game->move_nb++;
        printf("%d\n", game->move_nb);
        game->player_y--;
-       mlx_clear_window(game->mlx, game->win);
+       player_coin(game);
        render_map(game);
    }
    if ((keycode == 115 || keycode == 65364)
@@ -19,7 +19,7 @@ int handle_key(int keycode, void *param)
        game->move_nb++;
        printf("%d\n", game->move_nb);
        game->player_y++;
-       mlx_clear_window(game->mlx, game->win);
+       player_coin(game);
        render_map(game);
    }
    if ((keycode == 97 || keycode == 65361) 
@@ -28,7 +28,7 @@ int handle_key(int keycode, void *param)
        game->move_nb++;
        printf("%d\n", game->move_nb);
        game->player_x--;
-       mlx_clear_window(game->mlx, game->win);
+       player_coin(game);
        render_map(game);
    }
    if ((keycode == 100 || keycode == 65363)
@@ -37,7 +37,7 @@ int handle_key(int keycode, void *param)
        game->move_nb++;
        printf("%d\n", game->move_nb);
        game->player_x++;
-       mlx_clear_window(game->mlx, game->win);
+       player_coin(game);
        render_map(game);
    }
    if (keycode == 65307)
@@ -47,6 +47,7 @@ int handle_key(int keycode, void *param)
    }
    return 0;
 }
+
 void find_player(t_vars *game)
  {
     int y; 
@@ -66,5 +67,28 @@ void find_player(t_vars *game)
             x++;
         }
         y++;
+    }
+}
+
+void player_coin(t_vars *game)
+{
+    if (game->map[game->player_y][game->player_x] == 'C')
+    {
+        game->map[game->player_y][game->player_x] = '0'; 
+        game->cont_coin++;
+    }
+    if (game->map[game->player_y][game->player_x] == 'H')
+        {
+            printf("----------hwak l3aza-------------------");
+            ft_free_map(game);
+            mlx_destroy_window(game->mlx, game->win);
+            exit(0);
+        }
+    if(game->cont_coin == game->word_coin 
+             && game->map[game->player_y][game->player_x] == 'E')            
+    {
+        printf("---------------YOU WIN--------------------");
+        mlx_destroy_window(game->mlx, game->win);
+        exit(0);
     }
 }

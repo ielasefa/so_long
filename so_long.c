@@ -60,7 +60,6 @@ int main(int ac, char **av)
    
    if (!verification_map(&game))
    {
-       printf("Error: l map 3ndha mochkila\n");
        ft_free_map(&game);
        return 1;
    }
@@ -79,23 +78,23 @@ int main(int ac, char **av)
        printf("Error: ma qdertch n7ll l window\n");
        ft_exit(&game);
    }
-   game.img_player = mlx_xpm_file_to_image(game.mlx, "assets/cj.xpm", &width, &height);
-   game.img_l3zwa = mlx_xpm_file_to_image(game.mlx, "assets/player.xpm", &width, &height);
+   game.img_player = mlx_xpm_file_to_image(game.mlx, "assets/player.xpm", &width, &height);
+   game.img_l3zwa = mlx_xpm_file_to_image(game.mlx, "assets/cj.xpm", &width, &height);
    game.img_hait = mlx_xpm_file_to_image(game.mlx, "assets/haiiiit.xpm", &width, &height);
    game.img_ard = mlx_xpm_file_to_image(game.mlx, "assets/lard.xpm", &width, &height);
    game.img_coin = mlx_xpm_file_to_image(game.mlx, "assets/icon_heart.xpm", &width, &height);
+      game.img_home = mlx_xpm_file_to_image(game.mlx, "assets/home.xpm", &width, &height);
    if (!game.img_player || !game.img_l3zwa || !game.img_hait || !game.img_ard)
    {
        printf("Error: ma qdertch nloadi l images\n");
        ft_exit(&game);
    }
-   
+   cont_coin(&game);
    find_player(&game);
    render_map(&game);
    mlx_key_hook(game.win, handle_key, &game);
    mlx_hook(game.win, 17, 0, close_window, &game);
    
    mlx_loop(game.mlx);
-   
    return 0;
 }
