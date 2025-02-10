@@ -79,7 +79,7 @@ void player_coin(t_vars *game)
     }
     if (game->map[game->player_y][game->player_x] == 'H')
         {
-            printf("----------hwak l3aza-------------------");
+            printf("----------hwak l3azwa-------------------");
             ft_free_map(game);
             mlx_destroy_window(game->mlx, game->win);
             exit(0);

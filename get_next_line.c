@@ -1,22 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: iel-asef <iel-asef@student.1337.ma>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 17:17:27 by iel-asef          #+#    #+#             */
-/*   Updated: 2024/12/02 18:12:44 by iel-asef         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-//#include "so_long.h"
 #include "get_next_line.h"
 
 char	*ft_read(int fd, char *storage)
 {
-	char		*buffer;
-	ssize_t		read_bytes;
-	char		*temp;
+	char	*buffer;
+	ssize_t	read_bytes;
+	char	*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -107,7 +95,9 @@ char	*get_next_line(int fd)
 		return (free(storage), storage = NULL, NULL);
 	line = ft_line(storage);
 	if (!line)
+	{
 		return (free(storage), storage = NULL, NULL);
+	}
 	storage = clean_storage(storage);
 	return (line);
 }

@@ -57,4 +57,15 @@ void    cont_coin(t_vars *game)
         y++;
     }
 }
-
+/*
+void  animation(t_vars *game)
+{
+    game->animation[0] = mlx_xpm_file_to_image(game->mlx, "assets/11.xpm", &width, &height);
+    game->animation[1] = mlx_xpm_file_to_image(game->mlx, "assets/2.xpm", &width, &height);
+    game->animation[2] = mlx_xpm_file_to_image(game->mlx, "assets/3.xpm", &width, &height);
+    game->animation[3] = mlx_xpm_file_to_image(game->mlx, "assets/4.xpm", &width, &height);
+    game->animation[4] = mlx_xpm_file_to_image(game->mlx, "assets/5.xpm", &width, &height);
+    game->animation[5] = mlx_xpm_file_to_image(game->mlx, "assets/6.xpm", &width, &height);
+    game->animation[6] = mlx_xpm_file_to_image(game->mlx, "assets/7.xpm", &width, &height);
+}
+*/
