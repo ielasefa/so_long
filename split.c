@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iel-asef <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 19:19:28 by iel-asef          #+#    #+#             */
+/*   Updated: 2025/02/13 19:19:31 by iel-asef         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	count(char const *s, char c)
@@ -46,7 +58,7 @@ char	*copy(char *str, int start, int end)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
+	char **result;
 
 	int i, (start), (word), (j);
 	if (!s)

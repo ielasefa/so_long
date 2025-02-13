@@ -1,42 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iel-asef <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 19:18:32 by iel-asef          #+#    #+#             */
+/*   Updated: 2025/02/13 19:18:34 by iel-asef         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void ft_exit(t_vars *game)
+void	ft_exit(t_vars *game)
 {
-    free_animation(game);
-    if (game->win)
-        mlx_destroy_window(game->mlx, game->win);
-    if (game->img_player)
-        mlx_destroy_image(game->mlx, game->img_player);
-    if (game->mlx)
-    {
-        mlx_destroy_display(game->mlx);
-        free(game->mlx);
-    }
-    ft_free_map(game);
-    exit(0);
+	free_animation(game);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->img_player)
+		mlx_destroy_image(game->mlx, game->img_player);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	ft_free_map(game);
+	exit(0);
 }
 
-void ft_free_map(t_vars *game)
+void	ft_free_map(t_vars *game)
 {
-    int i = 0;
-    
-    if (game->map)
-    {
-        while (game->map[i])
-        {
-            free(game->map[i]);
-            i++;
-        }
-        free(game->map);
-    }
+	int	i;
+
+	i = 0;
+	if (game->map)
+	{
+		while (game->map[i])
+		{
+			free(game->map[i]);
+			i++;
+		}
+		free(game->map);
+	}
 }
 
-int close_window(t_vars *game)
+int	close_window(t_vars *game)
 {
-    ft_exit(game);
-    return (0);
+	ft_exit(game);
+	return (0);
 }
-
 
 static int	len_itoi(int n)
 {
@@ -81,4 +93,3 @@ char	*ft_itoa(int n)
 	}
 	return (dst);
 }
-
