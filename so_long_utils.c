@@ -2,11 +2,17 @@
 
 void ft_exit(t_vars *game)
 {
+    free_animation(game);
     if (game->win)
         mlx_destroy_window(game->mlx, game->win);
-    
+    if (game->img_player)
+        mlx_destroy_image(game->mlx, game->img_player);
+    if (game->mlx)
+    {
+        mlx_destroy_display(game->mlx);
+        free(game->mlx);
+    }
     ft_free_map(game);
-    
     exit(0);
 }
 
@@ -75,3 +81,4 @@ char	*ft_itoa(int n)
 	}
 	return (dst);
 }
+

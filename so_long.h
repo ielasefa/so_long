@@ -7,32 +7,42 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <mlx.h>
+#include <time.h>
 
 # define ESC_KEY 65307
 #define TILE_SIZE 64
+
 typedef struct s_vars 
 {
-    void *mlx;
-    void *win;
-    void *img;
-    char **map;
-    void *img_player;
-    void *img_l3zwa;
-    void *img_hait;
-    void *img_ard;
-    void *img_coin;
-    void *img_win;
-    void *img_home;
-    int width;
-    int height;
-    int player_x;
-    int player_y;
-    int fd;
-    int move_nb;
-    int word_coin;
-    int cont_coin;
-}   t_vars;
+    void    *mlx;
+    void    *win;
+    void    *img;
+    char    **map;
+    void    *img_player;
+    void    *img_l3zwa;
+    void    *img_hait;
+    void    *img_ard;
+    void    *img_coin;
+    void    *img_win;
+    void    *img_home;
+    void    *animation[7];
+    int     width;
+    int     height;
+    int     player_x;
+    int     player_y;
+    int     fd;
+    int     move_nb;
+    int     word_coin;
+    int     cont_coin;
+    int     current_frame;
+    int      frame_delay;
+    int     frame_counter;
 
+   int enemy_x;
+    int enemy_y;
+    int dir;
+    int enemy_speed;
+} t_vars;
 
 // get_next_line
 size_t	ft_strlen(const char *s);
@@ -63,12 +73,22 @@ char	*ft_itoa(int n);
 
 //img map
 void render_map( t_vars *game);
-
+void animation_image(t_vars *game);
+int animation_loop(t_vars *game);
+void free_animation(t_vars *game);
+int game_loop(t_vars *game);
 //move 
 void find_player(t_vars *game);
 int handle_key(int keycode, void *param);
 void    cont_coin(t_vars *game);
 void player_coin(t_vars *game);
+void	move_player(t_vars *game, int y_move, int x_move);
+ 
+//enyme
+int game_loop(t_vars *game);
+void check_enemy_collision(t_vars *game);
+void find_enemy(t_vars *game);
+void move_enemy(t_vars *game);
 
 
 #endif

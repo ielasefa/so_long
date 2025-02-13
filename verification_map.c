@@ -87,7 +87,7 @@ int verification_map(t_vars *game)
         return (0);
     }
 
-    if (player != 1 || exit != 1 || home != 1 || collect < 1)
+    if (player != 1 || exit != 1 || home < 1 || collect < 1)
     {
         printf("Error: Wrong number of elements\n");
         return (0);
