@@ -39,8 +39,6 @@ char	**get_maps(int fd)
 	return (map_array);
 }
 
-#include "so_long.h"
-
 int	open_map(char *filename)
 {
 	int	fd;
@@ -65,8 +63,8 @@ int	init_game(t_vars *game, int fd)
 	}
 	if (!verification_map(game))
 	{
-		ft_free_map(game);
-		return (0);
+    	ft_free_map(game);
+    	return (0);
 	}
 	game->mlx = mlx_init();
 	if (!game->mlx)
@@ -105,13 +103,14 @@ int	load_images(t_vars *game, int *width, int *height)
 			width, height);
 	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/home.xpm", width,
 			height);
-	if (!game->img_player || !game->img_l3zwa || !game->img_hait
-		|| !game->img_ard || !game->img_coin || !game->img_home)
-	{
-		printf("Error: ma qdertch nloadi l images\n");
-		ft_exit(game);
-		return (0);
-	}
+if (!game->img_player || !game->img_l3zwa || !game->img_hait
+    || !game->img_ard || !game->img_coin || !game->img_home)
+{
+    printf("Error: ma qdertch nloadi l images\n");
+    ft_exit(game); // ensure cleanup
+    return (0);
+}
+
 	return (1);
 }
 
@@ -141,7 +140,6 @@ int	main(int ac, char **av)
 	animation_image(&game);
 	game.current_frame = 0;
 	cont_coin(&game);
-	find_player(&game);
 	find_enemy(&game);
 	game.dir = 1;
 	game.enemy_speed = 25000;
@@ -150,5 +148,6 @@ int	main(int ac, char **av)
 	mlx_hook(game.win, 17, 0, close_window, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
+	//ft_exit(&game);
 	return (0);
 }

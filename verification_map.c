@@ -79,6 +79,7 @@ static int	ft_check_line(t_vars *game)
 	return (1);
 }
 
+
 int	verification_map(t_vars *game)
 {
 	int collect = 0;
@@ -111,5 +112,6 @@ int	verification_map(t_vars *game)
 		printf("Error: Map borders are not walls\n");
 		return (0);
 	}
+	//if(! validate_flood_fill(game))
 	return (1);
 }

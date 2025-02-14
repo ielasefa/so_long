@@ -58,19 +58,6 @@ void	render_map(t_vars *game)
 	}
 }
 
-void	free_animation(t_vars *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < 7)
-	{
-		if (game->animation[i])
-			mlx_destroy_image(game->mlx, game->animation[i]);
-		i++;
-	}
-}
-
 void	animation_image(t_vars *game)
 {
 	int	width;

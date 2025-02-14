@@ -5,7 +5,7 @@ SRCS = get_next_line.c get_next_line_utils.c so_long.c so_long_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 
-CC = gcc
+CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
 
 MLX_DIR = /usr/local/include

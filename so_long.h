@@ -33,15 +33,15 @@ typedef struct s_vars
 	int		fd;
 	int		move_nb;
 	int		word_coin;
-	int		cont_coin;
+	int		cont_coin; ///
 	int		current_frame;
 	int		frame_delay;
 	int		frame_counter;
-
 	int		enemy_x;
 	int		enemy_y;
 	int		dir;
 	int		enemy_speed;
+	char 	*copy_map;
 }			t_vars;
 
 // get_next_line
@@ -94,4 +94,5 @@ void		check_enemy_collision(t_vars *game);
 void		find_enemy(t_vars *game);
 void		move_enemy(t_vars *game);
 
+void free_mlx(t_vars *game);
 #endif

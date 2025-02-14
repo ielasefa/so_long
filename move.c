@@ -31,7 +31,7 @@ int	handle_key(int keycode, void *param)
 		move_player(game, 0, 1);
 	else if (keycode == 65307)
 	{
-		mlx_destroy_window(game->mlx, game->win);
+		ft_exit(game);
 		exit(0);
 	}
 	return (0);
@@ -47,29 +47,6 @@ void	move_player(t_vars *game, int y_move, int x_move)
 	render_map(game);
 }
 
-void	find_player(t_vars *game)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'P')
-			{
-				game->player_x = x;
-				game->player_y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
 void	player_coin(t_vars *game)
 {
 	if (game->map[game->player_y][game->player_x] == 'C')
@@ -80,18 +57,18 @@ void	player_coin(t_vars *game)
 	if (game->map[game->player_y][game->player_x] == 'H')
 	{
 		printf("----------hwak l3azwa-------------------");
-		ft_free_map(game);
-		mlx_destroy_window(game->mlx, game->win);
+		ft_exit(game);
 		exit(0);
 	}
 	if (game->cont_coin == game->word_coin
 		&& game->map[game->player_y][game->player_x] == 'E')
 	{
 		printf("---------------YOU WIN--------------------");
-		mlx_destroy_window(game->mlx, game->win);
+		ft_exit(game);
 		exit(0);
 	}
 }
+
 void	cont_coin(t_vars *game)
 {
 	int	x;
