@@ -142,7 +142,7 @@ int	main(int ac, char **av)
 	cont_coin(&game);
 	find_enemy(&game);
 	game.dir = 1;
-	game.enemy_speed = 25000;
+	game.enemy_speed = 33000;
 	render_map(&game);
 	mlx_key_hook(game.win, handle_key, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
