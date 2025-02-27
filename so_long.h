@@ -74,6 +74,8 @@ int			close_window(t_vars *game);
 void		ft_exit(t_vars *game);
 void		ft_free_map(t_vars *game);
 char		*ft_itoa(int n);
+char	*ft_strrchr(const char *s, int c);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // img map
 void		render_map(t_vars *game);

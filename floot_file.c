@@ -26,7 +26,7 @@ void copy_map(t_vars *game)
     }
     game->copy_map[i] = NULL;
 }
-
+ 
 void flood_fill(t_vars *game, int x, int y, int *exit ,int *player ,int *total_coin)
 {
     if (x < 0 || y < 0 || !game->copy_map[y] || !game->copy_map[y][x])
@@ -58,7 +58,9 @@ int validate_flood_fill(t_vars *game)
     int exit;
     int player;
     int total_coin;
+    int i;
     
+    i = 0;
     total_coin = 0;
     exit = 0;
     player = 0;
@@ -68,7 +70,6 @@ int validate_flood_fill(t_vars *game)
         return (0);    
     flood_fill(game, game->player_x, game->player_y, &exit , &player ,&total_coin);
     
-    int i = 0;
     while (game->copy_map[i])
         free(game->copy_map[i++]);
     free(game->copy_map);

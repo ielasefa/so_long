@@ -93,7 +93,7 @@ int	animation_loop(t_vars *game)
 	int y;
 
 	count++;
-	if (count % 3000 == 0)
+	if (count % 3500 == 0)
 	{
 		game->current_frame = (game->current_frame + 1) % 7;
 		y = 0;

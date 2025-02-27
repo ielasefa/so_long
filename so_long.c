@@ -22,6 +22,8 @@ char	**get_maps(int fd)
 	all_lines = NULL;
 	while ((line = get_next_line(fd)) != NULL)
 	{
+		if (line[0] == '\n')
+			return NULL;
 		if (all_lines == NULL)
 			all_lines = ft_strdup(line);
 		else
@@ -41,8 +43,17 @@ char	**get_maps(int fd)
 
 int	open_map(char *filename)
 {
-	int	fd;
+	char	*ext;
+	int		fd;
 
+	ext = ft_strrchr(filename, '.');
+	if (ext == NULL)
+		printf("Error \nin name file .ber.");
+	else if (ft_strncmp(ext, ".ber", 4) || *(ext + 4) != '\0')
+	{
+		printf("Eroor\n in name file.");
+		exit(1);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
@@ -82,7 +93,7 @@ int	create_window(t_vars *game)
 			* TILE_SIZE, "So Long");
 	if (!game->win)
 	{
-		printf("Error:\n in \n");
+		printf("Error:\n in wenda\n");
 		ft_exit(game);
 		return (0);
 	}
@@ -101,7 +112,7 @@ int	load_images(t_vars *game, int *width, int *height)
 			height);
 	game->img_coin = mlx_xpm_file_to_image(game->mlx, "assets/icon_heart.xpm",
 			width, height);
-	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/home.xpm", width,
+	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/exit1.xpm", width,
 			height);
 if (!game->img_player || !game->img_l3zwa || !game->img_hait
     || !game->img_ard || !game->img_coin || !game->img_home)
@@ -137,12 +148,11 @@ int	main(int ac, char **av)
 	if (!load_images(&game, &width, &height))
 		return (1);
 	srand(time(NULL));
-	cont_coin(&game);
 	animation_image(&game);
 	game.current_frame = 0;
 	find_enemy(&game);
 	game.dir = 1;
-	game.enemy_speed = 400000;
+	game.enemy_speed = 35000;
 	render_map(&game);
 	mlx_key_hook(game.win, handle_key, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);

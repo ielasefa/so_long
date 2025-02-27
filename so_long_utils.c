@@ -12,50 +12,85 @@
 
 #include "so_long.h"
 
-// void ft_exit(t_vars *game)
-// {
-//     if (game->img_player)
-//         mlx_destroy_image(game->mlx, game->img_player);
-//     if (game->img_l3zwa)
-//         mlx_destroy_image(game->mlx, game->img_l3zwa);
-//     if (game->img_hait)
-//         mlx_destroy_image(game->mlx, game->img_hait);
-//     if (game->img_ard)
-//         mlx_destroy_image(game->mlx, game->img_ard);
-//     if (game->img_home)
-//         mlx_destroy_image(game->mlx, game->img_home);
-//     if (game->img_coin)
-//         mlx_destroy_image(game->mlx, game->img_coin);
+void ft_exit(t_vars *game)
+{
+    if (game->img_player)
+        mlx_destroy_image(game->mlx, game->img_player);
+    if (game->img_l3zwa)
+        mlx_destroy_image(game->mlx, game->img_l3zwa);
+    if (game->img_hait)
+        mlx_destroy_image(game->mlx, game->img_hait);
+    if (game->img_ard)
+        mlx_destroy_image(game->mlx, game->img_ard);
+    if (game->img_home)
+        mlx_destroy_image(game->mlx, game->img_home);
+    if (game->img_coin)
+        mlx_destroy_image(game->mlx, game->img_coin);
 
-//     free_animation(game);
-//     ft_free_map(game);
-// 	if (game->win)
-// 	{
-// 		mlx_destroy_window(game->mlx, game->win);
-// 	}
-// 	if (game->mlx)
-// 	{
-// 		mlx_destroy_display(game->mlx);
-// 		free(game->mlx);
-// 	}
-//     exit(0);
-// }
+    free_animation(game);
+    ft_free_map(game);
+	if (game->win)
+	{
+		mlx_destroy_window(game->mlx, game->win);
+	}
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+    exit(0);
+}
 
-// void	ft_free_map(t_vars *game)
-// {
-// 	int	i;
+void	ft_free_map(t_vars *game)
+{
+	int	i;
 
-// 	i = 0;
-// 	if (game->map)
-// 	{
-// 		while (game->map[i])
-// 		{
-// 			free(game->map[i]);
-// 			i++;
-// 		}
-// 		free(game->map);
-// 	}
-// }
+	i = 0;
+	if (game->map)
+	{
+		while (game->map[i])
+		{
+			free(game->map[i]);
+			i++;
+		}
+		free(game->map);
+	}
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
+	{
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strrchr(const char *s, int c)
+{
+	int	i;
+
+	i = ft_strlen(s);
+	if (!s)
+		return (NULL);
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+		{
+			return ((char *)s + i);
+		}
+		i--;
+	}
+	return (NULL);
+}
 
 int	close_window(t_vars *game)
 {
@@ -63,16 +98,16 @@ int	close_window(t_vars *game)
 	return (0);
 }
 
-// void free_animation(t_vars *game)
-// {
-//     int i = 0;
-//     while (i < 7)
-//     {
-//         if (game->animation[i])
-//             mlx_destroy_image(game->mlx, game->animation[i]);
-//         i++;
-//     }
-// }
+void free_animation(t_vars *game)
+{
+    int i = 0;
+    while (i < 7)
+    {
+        if (game->animation[i])
+            mlx_destroy_image(game->mlx, game->animation[i]);
+        i++;
+    }
+}
 
 static int	len_itoi(int n)
 {
