@@ -36,7 +36,9 @@ void flood_fill(t_vars *game, int x, int y, int *exit ,int *player ,int *total_c
         return;
     
     if (game->copy_map[y][x] == 'C')
-        total_coin++;
+    {
+        (*total_coin)++;
+    }
     if (game->copy_map[y][x] == 'E' )
         (*exit)++;
 
@@ -61,6 +63,7 @@ int validate_flood_fill(t_vars *game)
     exit = 0;
     player = 0;
     copy_map(game);
+    cont_coin(game);
     if (!game->copy_map)
         return (0);    
     flood_fill(game, game->player_x, game->player_y, &exit , &player ,&total_coin);

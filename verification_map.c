@@ -97,7 +97,7 @@ int	verification_map(t_vars *game)
 		printf("Error: Invalid characters found\n");
 		return (0);
 	}
-	if (player != 1 || exit != 1 || home < 1 || collect < 1)
+	if (player != 1 || exit != 1 || home != 1 || collect < 1)
 	{
 		printf("Error: Wrong number of elements\n");
 		return (0);
@@ -114,7 +114,7 @@ int	verification_map(t_vars *game)
 	}
 	if (!validate_flood_fill(game))
 	{
-		printf("Error: Map borders are not walls\n");
+		printf("Error: flood file\n");
 		return (0);
 	}
 	return (1);

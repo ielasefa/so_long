@@ -137,9 +137,9 @@ int	main(int ac, char **av)
 	if (!load_images(&game, &width, &height))
 		return (1);
 	srand(time(NULL));
+	cont_coin(&game);
 	animation_image(&game);
 	game.current_frame = 0;
-	cont_coin(&game);
 	find_enemy(&game);
 	game.dir = 1;
 	game.enemy_speed = 400000;
