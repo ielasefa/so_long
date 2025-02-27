@@ -112,6 +112,10 @@ int	verification_map(t_vars *game)
 		printf("Error: Map borders are not walls\n");
 		return (0);
 	}
-	//if(! validate_flood_fill(game))
+	if (!validate_flood_fill(game))
+	{
+		printf("Error: Map borders are not walls\n");
+		return (0);
+	}
 	return (1);
 }

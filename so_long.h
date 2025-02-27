@@ -41,7 +41,7 @@ typedef struct s_vars
 	int		enemy_y;
 	int		dir;
 	int		enemy_speed;
-	char 	*copy_map;
+	char 	**copy_map;
 }			t_vars;
 
 // get_next_line
@@ -94,5 +94,9 @@ void		check_enemy_collision(t_vars *game);
 void		find_enemy(t_vars *game);
 void		move_enemy(t_vars *game);
 
-void free_mlx(t_vars *game);
+//fllot file
+void flood_fill(t_vars *game, int x, int y, int *exit ,int *player ,int *total_coin);
+int validate_flood_fill(t_vars *game);
+void copy_map(t_vars *game);
+
 #endif

@@ -58,7 +58,7 @@ int	init_game(t_vars *game, int fd)
 	close(fd);
 	if (!game->map)
 	{
-		printf("Error: ma qdertch nloadi l map\n");
+		printf("Error: invalide map\n");
 		return (0);
 	}
 	if (!verification_map(game))
@@ -69,7 +69,7 @@ int	init_game(t_vars *game, int fd)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-		printf("Error: mlx ma bghatch tinitilizi\n");
+		printf("Error\n: invalide mlx \n");
 		ft_free_map(game);
 		return (0);
 	}
@@ -82,7 +82,7 @@ int	create_window(t_vars *game)
 			* TILE_SIZE, "So Long");
 	if (!game->win)
 	{
-		printf("Error: ma qdertch n7ll l window\n");
+		printf("Error:\n in \n");
 		ft_exit(game);
 		return (0);
 	}
@@ -107,7 +107,7 @@ if (!game->img_player || !game->img_l3zwa || !game->img_hait
     || !game->img_ard || !game->img_coin || !game->img_home)
 {
     printf("Error: ma qdertch nloadi l images\n");
-    ft_exit(game); // ensure cleanup
+	ft_exit(game);
     return (0);
 }
 
@@ -142,12 +142,11 @@ int	main(int ac, char **av)
 	cont_coin(&game);
 	find_enemy(&game);
 	game.dir = 1;
-	game.enemy_speed = 33000;
+	game.enemy_speed = 400000;
 	render_map(&game);
 	mlx_key_hook(game.win, handle_key, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
-	//ft_exit(&game);
 	return (0);
 }

@@ -1,7 +1,8 @@
 NAME = so_long
 
-SRCS = get_next_line.c get_next_line_utils.c so_long.c so_long_utils.c \
-       split.c verification_map.c move.c image_map.c  enemy.c \
+SRCS = enemy.c       get_next_line.c        move.c           split.c \
+	floot_file.c  get_next_line_utils.c  so_long.c        verification_map.c \
+	free.c        image_map.c            so_long_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
