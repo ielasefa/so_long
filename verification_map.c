@@ -79,14 +79,17 @@ static int	ft_check_line(t_vars *game)
 	return (1);
 }
 
-
 int	verification_map(t_vars *game)
 {
-	int collect = 0;
-	int exit = 0;
-	int player = 0;
-	int home = 0;
+	int	collect;
+	int	exit;
+	int	player;
+	int	home;
 
+	collect = 0;
+	exit = 0;
+	player = 0;
+	home = 0;
 	if (!game->map || !game->map[0])
 	{
 		printf("Error: Empty map\n");

@@ -88,9 +88,9 @@ void	animation_image(t_vars *game)
 
 int	animation_loop(t_vars *game)
 {
-	static int count = 0;
-	int x;
-	int y;
+	static int	count = 0;
+	int			x;
+	int			y;
 
 	count++;
 	if (count % 3500 == 0)

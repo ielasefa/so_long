@@ -33,7 +33,7 @@ typedef struct s_vars
 	int		fd;
 	int		move_nb;
 	int		word_coin;
-	int		cont_coin; ///
+	int cont_coin; ///
 	int		current_frame;
 	int		frame_delay;
 	int		frame_counter;
@@ -41,7 +41,9 @@ typedef struct s_vars
 	int		enemy_y;
 	int		dir;
 	int		enemy_speed;
-	char 	**copy_map;
+	char	**copy_map;
+	int		player_x_f;
+	int		player_y_f;
 }			t_vars;
 
 // get_next_line
@@ -74,8 +76,8 @@ int			close_window(t_vars *game);
 void		ft_exit(t_vars *game);
 void		ft_free_map(t_vars *game);
 char		*ft_itoa(int n);
-char	*ft_strrchr(const char *s, int c);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_strrchr(const char *s, int c);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // img map
 void		render_map(t_vars *game);
@@ -96,9 +98,11 @@ void		check_enemy_collision(t_vars *game);
 void		find_enemy(t_vars *game);
 void		move_enemy(t_vars *game);
 
-//fllot file
-void flood_fill(t_vars *game, int x, int y, int *exit ,int *player ,int *total_coin);
-int validate_flood_fill(t_vars *game);
-void copy_map(t_vars *game);
+// flloot fill
+void		flood_fill(t_vars *game, int x, int y, int *exit, int *player,
+				int *total_coin);
+int			validate_flood_fill(t_vars *game);
+void		copy_map(t_vars *game);
+void		find_enemy_f(t_vars *game);
 
 #endif

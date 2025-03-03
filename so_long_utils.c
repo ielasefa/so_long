@@ -12,55 +12,12 @@
 
 #include "so_long.h"
 
-void ft_exit(t_vars *game)
-{
-    if (game->img_player)
-        mlx_destroy_image(game->mlx, game->img_player);
-    if (game->img_l3zwa)
-        mlx_destroy_image(game->mlx, game->img_l3zwa);
-    if (game->img_hait)
-        mlx_destroy_image(game->mlx, game->img_hait);
-    if (game->img_ard)
-        mlx_destroy_image(game->mlx, game->img_ard);
-    if (game->img_home)
-        mlx_destroy_image(game->mlx, game->img_home);
-    if (game->img_coin)
-        mlx_destroy_image(game->mlx, game->img_coin);
 
-    free_animation(game);
-    ft_free_map(game);
-	if (game->win)
-	{
-		mlx_destroy_window(game->mlx, game->win);
-	}
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
-    exit(0);
-}
-
-void	ft_free_map(t_vars *game)
-{
-	int	i;
-
-	i = 0;
-	if (game->map)
-	{
-		while (game->map[i])
-		{
-			free(game->map[i]);
-			i++;
-		}
-		free(game->map);
-	}
-}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
@@ -98,15 +55,17 @@ int	close_window(t_vars *game)
 	return (0);
 }
 
-void free_animation(t_vars *game)
+void	free_animation(t_vars *game)
 {
-    int i = 0;
-    while (i < 7)
-    {
-        if (game->animation[i])
-            mlx_destroy_image(game->mlx, game->animation[i]);
-        i++;
-    }
+	int	i;
+
+	i = 0;
+	while (i < 7)
+	{
+		if (game->animation[i])
+			mlx_destroy_image(game->mlx, game->animation[i]);
+		i++;
+	}
 }
 
 static int	len_itoi(int n)

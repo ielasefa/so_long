@@ -23,7 +23,7 @@ char	**get_maps(int fd)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (line[0] == '\n')
-			return NULL;
+			return (NULL);
 		if (all_lines == NULL)
 			all_lines = ft_strdup(line);
 		else
@@ -74,8 +74,8 @@ int	init_game(t_vars *game, int fd)
 	}
 	if (!verification_map(game))
 	{
-    	ft_free_map(game);
-    	return (0);
+		ft_free_map(game);
+		return (0);
 	}
 	game->mlx = mlx_init();
 	if (!game->mlx)
@@ -114,14 +114,13 @@ int	load_images(t_vars *game, int *width, int *height)
 			width, height);
 	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/exit1.xpm", width,
 			height);
-if (!game->img_player || !game->img_l3zwa || !game->img_hait
-    || !game->img_ard || !game->img_coin || !game->img_home)
-{
-    printf("Error: ma qdertch nloadi l images\n");
-	ft_exit(game);
-    return (0);
-}
-
+	if (!game->img_player || !game->img_l3zwa || !game->img_hait
+		|| !game->img_ard || !game->img_coin || !game->img_home)
+	{
+		printf("Error: ma qdertch nloadi l images\n");
+		ft_exit(game);
+		return (0);
+	}
 	return (1);
 }
 
