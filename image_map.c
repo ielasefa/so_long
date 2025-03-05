@@ -11,12 +11,34 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "ft_printf/ft_printf.h"
+
+void	render_tile(t_vars *game, int x, int y)
+{
+	if (game->map[y][x] == '1')
+		mlx_put_image_to_window(game->mlx, game->win, game->img_hait, x
+			* TILE_SIZE, y * TILE_SIZE);
+	else if (game->map[y][x] == '0')
+		mlx_put_image_to_window(game->mlx, game->win, game->img_ard, x
+			* TILE_SIZE, y * TILE_SIZE);
+	else if (game->map[y][x] == 'P')
+		mlx_put_image_to_window(game->mlx, game->win, game->img_ard, x
+			* TILE_SIZE, y * TILE_SIZE);
+	else if (game->map[y][x] == 'E')
+		mlx_put_image_to_window(game->mlx, game->win, game->img_ard, x
+			* TILE_SIZE, y * TILE_SIZE);
+	else if (game->map[y][x] == 'C')
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->animation[game->current_frame], x * TILE_SIZE, y * TILE_SIZE);
+	else if (game->map[y][x] == 'H')
+		mlx_put_image_to_window(game->mlx, game->win, game->img_l3zwa, x
+			* TILE_SIZE, y * TILE_SIZE);
+}
 
 void	render_map(t_vars *game)
 {
-	int		x;
-	int		y;
-	char	*move;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (game->map[y])
@@ -24,29 +46,18 @@ void	render_map(t_vars *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			if (game->map[y][x] == '1')
-				mlx_put_image_to_window(game->mlx, game->win, game->img_hait, x
-					* TILE_SIZE, y * TILE_SIZE);
-			else if (game->map[y][x] == '0')
-				mlx_put_image_to_window(game->mlx, game->win, game->img_ard, x
-					* TILE_SIZE, y * TILE_SIZE);
-			else if (game->map[y][x] == 'P')
-				mlx_put_image_to_window(game->mlx, game->win, game->img_ard, x
-					* TILE_SIZE, y * TILE_SIZE);
-			else if (game->map[y][x] == 'E')
-				mlx_put_image_to_window(game->mlx, game->win, game->img_home, x
-					* TILE_SIZE, y * TILE_SIZE);
-			else if (game->map[y][x] == 'C')
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->animation[game->current_frame], x * TILE_SIZE, y
-					* TILE_SIZE);
-			else if (game->map[y][x] == 'H')
-				mlx_put_image_to_window(game->mlx, game->win, game->img_l3zwa, x
-					* TILE_SIZE, y * TILE_SIZE);
+			render_tile(game, x, y);
 			x++;
 		}
 		y++;
 	}
+	render_player(game);
+}
+
+void	render_player(t_vars *game)
+{
+	char	*move;
+
 	mlx_put_image_to_window(game->mlx, game->win, game->img_player,
 		game->player_x * TILE_SIZE, game->player_y * TILE_SIZE);
 	move = ft_itoa(game->move_nb);
@@ -80,7 +91,7 @@ void	animation_image(t_vars *game)
 	if (!game->animation[0] || !game->animation[1] || !game->animation[2]
 		|| !game->animation[4] || !game->animation[5] || !game->animation[6])
 	{
-		printf("Error: animation images\n");
+		ft_printf("Error: animation images\n");
 		ft_exit(game);
 		return ;
 	}

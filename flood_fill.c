@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "ft_printf/ft_printf.h"
 
 void	copy_map(t_vars *game)
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "ft_printf/ft_printf.h"
 
 void	find_enemy(t_vars *game)
 {
@@ -27,6 +28,29 @@ void	find_enemy(t_vars *game)
 			{
 				game->enemy_x = x;
 				game->enemy_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	find_home(t_vars *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'E')
+			{
+				game->home_x = x;
+				game->home_y = y;
 				return ;
 			}
 			x++;
@@ -81,7 +105,7 @@ void	check_enemy_collision(t_vars *game)
 {
 	if (game->player_x == game->enemy_x && game->player_y == game->enemy_y)
 	{
-		printf("\nGame Over!\n");
+		ft_printf("\nGame Over!\n");
 		ft_exit(game);
 	}
 }

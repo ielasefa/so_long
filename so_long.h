@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iel-asef <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/05 17:34:02 by iel-asef          #+#    #+#             */
+/*   Updated: 2025/03/05 17:34:04 by iel-asef         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
 # include <fcntl.h>
 # include <mlx.h>
 # include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <time.h>
 # include <unistd.h>
@@ -33,12 +44,14 @@ typedef struct s_vars
 	int		fd;
 	int		move_nb;
 	int		word_coin;
-	int cont_coin; ///
+	int		cont_coin;
 	int		current_frame;
 	int		frame_delay;
 	int		frame_counter;
 	int		enemy_x;
 	int		enemy_y;
+	int		home_x;
+	int		home_y;
 	int		dir;
 	int		enemy_speed;
 	char	**copy_map;
@@ -70,6 +83,8 @@ int			verification_caractere(t_vars *game, int *collection, int *exit,
 int			verification_line(t_vars *game);
 int			verification_map(t_vars *game);
 int			check_borders(t_vars *game);
+void		handle_player(t_vars *game, int *play, int x, int y);
+int			verification_map_2(t_vars *game);
 
 // so_long-util
 int			close_window(t_vars *game);
@@ -85,6 +100,9 @@ void		animation_image(t_vars *game);
 int			animation_loop(t_vars *game);
 void		free_animation(t_vars *game);
 int			game_loop(t_vars *game);
+void		render_tile(t_vars *game, int x, int y);
+void		render_player(t_vars *game);
+
 // move
 void		find_player(t_vars *game);
 int			handle_key(int keycode, void *param);
@@ -97,6 +115,7 @@ int			game_loop(t_vars *game);
 void		check_enemy_collision(t_vars *game);
 void		find_enemy(t_vars *game);
 void		move_enemy(t_vars *game);
+void		find_home(t_vars *game);
 
 // flloot fill
 void		flood_fill(t_vars *game, int x, int y, int *exit, int *player,
@@ -104,5 +123,9 @@ void		flood_fill(t_vars *game, int x, int y, int *exit, int *player,
 int			validate_flood_fill(t_vars *game);
 void		copy_map(t_vars *game);
 void		find_enemy_f(t_vars *game);
+
+// ift_itio
+char		*ft_itoa(int n);
+int			len_itoi(int n);
 
 #endif

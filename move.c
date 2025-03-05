@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "ft_printf/ft_printf.h"
 
 int	handle_key(int keycode, void *param)
 {
-	t_vars	*game;
+	t_vars *game;
 
 	game = (t_vars *)param;
 	if ((keycode == 119 || keycode == 65362) && game->map[game->player_y
@@ -37,10 +38,11 @@ int	handle_key(int keycode, void *param)
 	return (0);
 }
 
+
 void	move_player(t_vars *game, int y_move, int x_move)
 {
 	game->move_nb++;
-	printf("%d\n", game->move_nb);
+	ft_printf("%d\n", game->move_nb);
 	game->player_y += y_move;
 	game->player_x += x_move;
 	player_coin(game);
@@ -49,21 +51,28 @@ void	move_player(t_vars *game, int y_move, int x_move)
 
 void	player_coin(t_vars *game)
 {
+	find_home(game);
 	if (game->map[game->player_y][game->player_x] == 'C')
 	{
 		game->map[game->player_y][game->player_x] = '0';
 		game->cont_coin++;
+		if (game->cont_coin == game->word_coin)
+		{
+			game->map[game->home_y][game->home_x] = 'E';
+			mlx_put_image_to_window(game->mlx, game->win, game->img_home,
+				game->home_x * TILE_SIZE, game->home_y * TILE_SIZE);
+		}
 	}
-	if (game->map[game->player_y][game->player_x] == 'H')
+	if (game->map[game->player_y][game->player_x] == 'E'
+		&& game->cont_coin == game->word_coin)
 	{
-		printf("----------hwak l3azwa-------------------");
+		ft_printf("---------------YOU WIN--------------------");
 		ft_exit(game);
 		exit(0);
 	}
-	if (game->cont_coin == game->word_coin
-		&& game->map[game->player_y][game->player_x] == 'E')
+	if (game->map[game->player_y][game->player_x] == 'H')
 	{
-		printf("---------------YOU WIN--------------------");
+		ft_printf("----------Game Over-------------------");
 		ft_exit(game);
 		exit(0);
 	}
@@ -71,8 +80,8 @@ void	player_coin(t_vars *game)
 
 void	cont_coin(t_vars *game)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	y = 0;
 	while (game->map[y])

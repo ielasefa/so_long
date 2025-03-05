@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "ft_printf/ft_printf.h"
 
 char	**get_maps(int fd)
 {
@@ -20,7 +21,7 @@ char	**get_maps(int fd)
 	char	*temp;
 
 	all_lines = NULL;
-	while ((line = get_next_line(fd)) != NULL)
+	while (( line = get_next_line(fd)) != NULL)
 	{
 		if (line[0] == '\n')
 			return (NULL);
@@ -48,16 +49,16 @@ int	open_map(char *filename)
 
 	ext = ft_strrchr(filename, '.');
 	if (ext == NULL)
-		printf("Error \nin name file .ber.");
+		ft_printf("Error \nin name file .ber.");
 	else if (ft_strncmp(ext, ".ber", 4) || *(ext + 4) != '\0')
 	{
-		printf("Eroor\n in name file.");
+		ft_printf("Eroor\n in name file.");
 		exit(1);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error: l fichier ma kaynch ola ma kayt7lch\n");
+		ft_printf("Error: l fichier ma kaynch ola ma kayt7lch\n");
 		return (-1);
 	}
 	return (fd);
@@ -69,7 +70,7 @@ int	init_game(t_vars *game, int fd)
 	close(fd);
 	if (!game->map)
 	{
-		printf("Error: invalide map\n");
+		ft_printf("Error: invalide map\n");
 		return (0);
 	}
 	if (!verification_map(game))
@@ -80,7 +81,7 @@ int	init_game(t_vars *game, int fd)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-		printf("Error\n: invalide mlx \n");
+		ft_printf("Error\n: invalide mlx \n");
 		ft_free_map(game);
 		return (0);
 	}
@@ -93,7 +94,7 @@ int	create_window(t_vars *game)
 			* TILE_SIZE, "So Long");
 	if (!game->win)
 	{
-		printf("Error:\n in wenda\n");
+		ft_printf("Error:\n in wenda\n");
 		ft_exit(game);
 		return (0);
 	}
@@ -117,11 +118,22 @@ int	load_images(t_vars *game, int *width, int *height)
 	if (!game->img_player || !game->img_l3zwa || !game->img_hait
 		|| !game->img_ard || !game->img_coin || !game->img_home)
 	{
-		printf("Error: ma qdertch nloadi l images\n");
+		ft_printf("Error: ma qdertch nloadi l images\n");
 		ft_exit(game);
 		return (0);
 	}
 	return (1);
+}
+
+void	initialize_game(t_vars *game)
+{
+	srand(time(NULL));
+	animation_image(game);
+	game->current_frame = 0;
+	find_enemy(game);
+	game->dir = 1;
+	game->enemy_speed = 35000;
+	render_map(game);
 }
 
 int	main(int ac, char **av)
@@ -134,25 +146,17 @@ int	main(int ac, char **av)
 	game = (t_vars){0};
 	if (ac != 2)
 	{
-		printf("Error: khssek tdir argument wahd\n");
+		ft_printf("Error: khssek tdir argument wahd\n");
 		return (1);
 	}
 	fd = open_map(av[1]);
 	if (fd == -1)
 		return (1);
-	if (!init_game(&game, fd))
-		return (1);
-	if (!create_window(&game))
+	if (!init_game(&game, fd) || !create_window(&game))
 		return (1);
 	if (!load_images(&game, &width, &height))
 		return (1);
-	srand(time(NULL));
-	animation_image(&game);
-	game.current_frame = 0;
-	find_enemy(&game);
-	game.dir = 1;
-	game.enemy_speed = 35000;
-	render_map(&game);
+	initialize_game(&game);
 	mlx_key_hook(game.win, handle_key, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);

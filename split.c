@@ -6,7 +6,7 @@
 /*   By: iel-asef <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:19:28 by iel-asef          #+#    #+#             */
-/*   Updated: 2025/02/13 19:19:31 by iel-asef         ###   ########.fr       */
+/*   Updated: 2025/03/05 17:38:58 by iel-asef         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*copy(char *str, int start, int end)
 
 char	**ft_split(char const *s, char c)
 {
-	char **result;
+	char	**result;
 
 	int i, (start), (word), (j);
 	if (!s)
@@ -80,5 +80,5 @@ char	**ft_split(char const *s, char c)
 			result[j++] = copy((char *)s, start, i);
 	}
 	result[j] = (NULL);
-	return (result);
+	return (result);	
 }
