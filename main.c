@@ -19,7 +19,7 @@ int	create_window(t_vars *game)
 			* TILE_SIZE, "So Long");
 	if (!game->win)
 	{
-		ft_printf("Error:\n in wenda\n");
+		ft_printf("Error\nin win\n");
 		ft_exit(game);
 		return (0);
 	}
@@ -65,7 +65,7 @@ int	init_game(t_vars *game, t_verification *ver, int fd)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-		ft_printf("Error\ninvalide mlx \n");
+		ft_printf("Error\nin init mlx \n");
 		ft_free_map(game);
 		return (0);
 	}

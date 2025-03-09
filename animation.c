@@ -18,7 +18,7 @@ int	update_animation_frame(t_vars *game)
 	static int	count = 0;
 
 	count++;
-	if (count % 3000 == 0)
+	if (count % 4000 == 0)
 	{
 		game->current_frame = (game->current_frame + 1) % 5;
 		return (1);

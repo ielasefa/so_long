@@ -26,7 +26,7 @@ char	*add_line(char *all_lines, char *line)
 
 void	free_resources(char *all_lines, char *line)
 {
-	free(free_static(NULL));
+	//free(free_static(NULL));
 	free(all_lines);
 	free(line);
 }
