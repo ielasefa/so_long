@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "algorithm": "c",
-        "format": "c",
-        "sstream": "cpp",
-        "so_long.h": "c"
-    }
-}

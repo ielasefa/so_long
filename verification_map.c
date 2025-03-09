@@ -98,19 +98,24 @@ int	verification_map(t_vars *game, t_verification *ver)
 
 int	verification_map_2(t_vars *game, t_verification *ver)
 {
+	if (game->height > 32 || game->width > 60)
+	{
+		ft_printf("Error\n Lines > 32 height || line > 60 widht \n");
+		return (0);
+	}
 	if (!ft_check_line(game))
 	{
-		ft_printf("Error\n: Lines have different lengths\n");
+		ft_printf("Error\n Lines have different lengths\n");
 		return (0);
 	}
 	if (!ft_check_borders(game))
 	{
-		ft_printf("Error\n: Map borders are not walls\n");
+		ft_printf("Error\n Map borders are not walls\n");
 		return (0);
 	}
 	if (!validate_flood_fill(game, ver))
 	{
-		ft_printf("Error\n: Flood fill\n");
+		ft_printf("Error\n in Flood fill\n");
 		return (0);
 	}
 	return (1);
