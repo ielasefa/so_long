@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
 #include "ft_printf/ft_printf.h"
+#include "so_long.h"
 
 int	handle_key(int keycode, void *param)
 {
-	t_vars *game;
+	t_vars	*game;
 
 	game = (t_vars *)param;
-	if ((keycode == 119 || keycode == 65362) && game->map[game->player_y
-		- 1][game->player_x] != '1')
+	if ((keycode == 119 || keycode == 65362)
+		&& game->map[game->player_y - 1][game->player_x] != '1')
 		move_player(game, -1, 0);
-	else if ((keycode == 115 || keycode == 65364) && game->map[game->player_y
-		+ 1][game->player_x] != '1')
+	else if ((keycode == 115 || keycode == 65364)
+		&& game->map[game->player_y + 1][game->player_x] != '1')
 		move_player(game, 1, 0);
 	else if ((keycode == 97 || keycode == 65361)
 		&& game->map[game->player_y][game->player_x - 1] != '1')
@@ -38,7 +38,6 @@ int	handle_key(int keycode, void *param)
 	return (0);
 }
 
-
 void	move_player(t_vars *game, int y_move, int x_move)
 {
 	game->move_nb++;
@@ -51,17 +50,10 @@ void	move_player(t_vars *game, int y_move, int x_move)
 
 void	player_coin(t_vars *game)
 {
-	find_home(game);
 	if (game->map[game->player_y][game->player_x] == 'C')
 	{
 		game->map[game->player_y][game->player_x] = '0';
 		game->cont_coin++;
-		if (game->cont_coin == game->word_coin)
-		{
-			game->map[game->home_y][game->home_x] = 'E';
-			mlx_put_image_to_window(game->mlx, game->win, game->img_home,
-				game->home_x * TILE_SIZE, game->home_y * TILE_SIZE);
-		}
 	}
 	if (game->map[game->player_y][game->player_x] == 'E'
 		&& game->cont_coin == game->word_coin)
@@ -70,18 +62,12 @@ void	player_coin(t_vars *game)
 		ft_exit(game);
 		exit(0);
 	}
-	if (game->map[game->player_y][game->player_x] == 'H')
-	{
-		ft_printf("----------Game Over-------------------");
-		ft_exit(game);
-		exit(0);
-	}
 }
 
 void	cont_coin(t_vars *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (game->map[y])

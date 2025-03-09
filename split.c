@@ -80,5 +80,5 @@ char	**ft_split(char const *s, char c)
 			result[j++] = copy((char *)s, start, i);
 	}
 	result[j] = (NULL);
-	return (result);	
+	return (result);
 }

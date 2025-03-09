@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
 #include "ft_printf/ft_printf.h"
+#include "so_long.h"
 
 void	copy_map(t_vars *game)
 {
@@ -39,29 +39,26 @@ void	copy_map(t_vars *game)
 	game->copy_map[i] = NULL;
 }
 
-void	flood_fill(t_vars *game, int x, int y, int *exit, int *player,
-		int *total_coin)
+void	flood_fill(t_vars *game, int x, int y, t_verification *ver)
 {
 	if (x < 0 || y < 0 || !game->copy_map[y] || !game->copy_map[y][x])
 		return ;
 	if (game->copy_map[y][x] == '1' || game->copy_map[y][x] == 'V')
 		return ;
 	if (game->copy_map[y][x] == 'C')
-	{
-		(*total_coin)++;
-	}
+		ver->total_coin_f++;
 	if (game->copy_map[y][x] == 'E')
-		(*exit)++;
+		ver->exit_f++;
 	if (game->copy_map[y][x] == 'P')
-		(*player)++;
+		ver->player_f++;
 	game->copy_map[y][x] = 'V';
-	flood_fill(game, x + 1, y, exit, player, total_coin);
-	flood_fill(game, x, y + 1, exit, player, total_coin);
-	flood_fill(game, x - 1, y, exit, player, total_coin);
-	flood_fill(game, x, y - 1, exit, player, total_coin);
+	flood_fill(game, x + 1, y, ver);
+	flood_fill(game, x, y + 1, ver);
+	flood_fill(game, x - 1, y, ver);
+	flood_fill(game, x, y - 1, ver);
 }
 
-void	find_enemy_f(t_vars *game)
+void	find_player_f(t_vars *game)
 {
 	int	x;
 	int	y;
@@ -72,7 +69,7 @@ void	find_enemy_f(t_vars *game)
 		x = 0;
 		while (game->copy_map[y][x])
 		{
-			if (game->copy_map[y][x] == 'H')
+			if (game->copy_map[y][x] == 'P')
 			{
 				game->player_x_f = x;
 				game->player_y_f = y;
@@ -84,28 +81,25 @@ void	find_enemy_f(t_vars *game)
 	}
 }
 
-int	validate_flood_fill(t_vars *game)
+int	validate_flood_fill(t_vars *game, t_verification *ver)
 {
-	int	exit;
-	int	player;
-	int	total_coin;
 	int	i;
 
 	i = 0;
-	total_coin = 0;
-	exit = 0;
-	player = 0;
+	ver->total_coin_f = 0;
+	ver->exit_f = 0;
+	ver->player_f = 0;
 	copy_map(game);
-	find_enemy_f(game);
+	find_player_f(game);
 	cont_coin(game);
 	if (!game->copy_map)
 		return (0);
-	flood_fill(game, game->player_x_f, game->player_y_f, &exit, &player,
-		&total_coin);
+	flood_fill(game, game->player_x_f, game->player_y_f, ver);
 	while (game->copy_map[i])
 		free(game->copy_map[i++]);
 	free(game->copy_map);
-	if (exit == 1 && player == 1 && game->word_coin == total_coin)
+	if (ver->exit_f == 1 && ver->player_f == 1
+		&& game->word_coin == ver->total_coin_f)
 		return (1);
 	return (0);
 }

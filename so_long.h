@@ -30,13 +30,12 @@ typedef struct s_vars
 	void	*img;
 	char	**map;
 	void	*img_player;
-	void	*img_l3zwa;
-	void	*img_hait;
-	void	*img_ard;
+	void	*img_wall;
+	void	*img_floor;
 	void	*img_coin;
 	void	*img_win;
 	void	*img_home;
-	void	*animation[7];
+	void	*animation[5];
 	int		width;
 	int		height;
 	int		player_x;
@@ -59,6 +58,18 @@ typedef struct s_vars
 	int		player_y_f;
 }			t_vars;
 
+typedef struct s_verification
+{
+	int		collect;
+	int		exit;
+	int		player;
+	int		collect_f;
+	int		exit_f;
+	int		player_f;
+	int		total_coin_f;
+
+}			t_verification;
+
 // get_next_line
 size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s1);
@@ -71,20 +82,26 @@ int			count(char const *s, char c);
 char		*copy(char *str, int start, int end);
 char		**ft_split(char const *s, char c);
 
-// so_long
-char		**get_maps(int fd);
+// main.c
 int			load_images(t_vars *game, int *width, int *height);
-int			open_map(char *filename);
 int			create_window(t_vars *game);
-int			init_game(t_vars *game, int fd);
+
+int			init_game(t_vars *game, t_verification *ver, int fd);
+/// open_map
+int			open_map(char *filename);
+void		free_resources(char *all_lines, char *line);
+char		**get_maps(int fd);
+char		*add_line(char *all_lines, char *line);
+
 // verification map
 int			verification_caractere(t_vars *game, int *collection, int *exit,
 				int *player);
 int			verification_line(t_vars *game);
-int			verification_map(t_vars *game);
+int			verification_map(t_vars *game, t_verification *ver);
 int			check_borders(t_vars *game);
-void		handle_player(t_vars *game, int *play, int x, int y);
-int			verification_map_2(t_vars *game);
+void		handle_player(t_vars *game, t_verification *ver, int x, int y);
+
+int			verification_map_2(t_vars *game, t_verification *ver);
 
 // so_long-util
 int			close_window(t_vars *game);
@@ -105,27 +122,26 @@ void		render_player(t_vars *game);
 
 // move
 void		find_player(t_vars *game);
+
 int			handle_key(int keycode, void *param);
 void		cont_coin(t_vars *game);
 void		player_coin(t_vars *game);
 void		move_player(t_vars *game, int y_move, int x_move);
 
-// enyme
-int			game_loop(t_vars *game);
-void		check_enemy_collision(t_vars *game);
-void		find_enemy(t_vars *game);
-void		move_enemy(t_vars *game);
-void		find_home(t_vars *game);
-
 // flloot fill
-void		flood_fill(t_vars *game, int x, int y, int *exit, int *player,
-				int *total_coin);
-int			validate_flood_fill(t_vars *game);
+void		flood_fill(t_vars *game, int x, int y, t_verification *ver);
+
+int			validate_flood_fill(t_vars *game, t_verification *ver);
+
 void		copy_map(t_vars *game);
-void		find_enemy_f(t_vars *game);
+void		find_player_f(t_vars *game);
 
 // ift_itio
 char		*ft_itoa(int n);
 int			len_itoi(int n);
+void		*free_static(void *ptr);
 
+// animation
+int			animation_loop(t_vars *game);
+void		render_collectibles_animation(t_vars *game);
 #endif

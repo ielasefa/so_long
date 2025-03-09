@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
 #include "ft_printf/ft_printf.h"
+#include "so_long.h"
 
-static int	ft_check_map_chars(t_vars *game, int *collect, int *ex, int *home,
-		int *play)
+static int	ft_check_map_chars(t_vars *game, t_verification *ver)
 {
 	int	x;
 	int	y;
@@ -26,13 +25,11 @@ static int	ft_check_map_chars(t_vars *game, int *collect, int *ex, int *home,
 		while (game->map[x][++y])
 		{
 			if (game->map[x][y] == 'E')
-				(*ex)++;
+				(ver->exit)++;
 			else if (game->map[x][y] == 'P')
-				handle_player(game, play, x, y);
+				handle_player(game, ver, x, y);
 			else if (game->map[x][y] == 'C')
-				(*collect)++;
-			else if (game->map[x][y] == 'H')
-				(*home)++;
+				(ver->collect)++;
 			else if (game->map[x][y] != '1' && game->map[x][y] != '0')
 				return (0);
 		}
@@ -76,50 +73,44 @@ static int	ft_check_line(t_vars *game)
 	return (1);
 }
 
-int	verification_map(t_vars *game)
+int	verification_map(t_vars *game, t_verification *ver)
 {
-	int	collect;
-	int	exit;
-	int	player;
-	int	home;
-
-	collect = 0;
-	exit = 0;
-	player = 0;
-	home = 0;
+	ver->collect = 0;
+	ver->exit = 0;
+	ver->player = 0;
 	if (!game->map || !game->map[0])
 	{
-		ft_printf("Error: Empty map\n");
+		ft_printf("Error\n: Empty map\n");
 		return (0);
 	}
-	if (!ft_check_map_chars(game, &collect, &exit, &home, &player))
+	if (!ft_check_map_chars(game, ver))
 	{
-		ft_printf("Error: Invalid characters found\n");
+		ft_printf("Error\n: Invalid characters found\n");
 		return (0);
 	}
-	if (player != 1 || exit != 1 || home != 1 || collect < 1)
+	if (ver->player != 1 || ver->exit != 1 || ver->collect < 1)
 	{
-		ft_printf("Error: Wrong number of elements\n");
+		ft_printf("Error\n: Wrong number of elements\n");
 		return (0);
 	}
-	return (verification_map_2(game));
+	return (verification_map_2(game, ver));
 }
 
-int	verification_map_2(t_vars *game)
+int	verification_map_2(t_vars *game, t_verification *ver)
 {
 	if (!ft_check_line(game))
 	{
-		ft_printf("Error: Lines have different lengths\n");
+		ft_printf("Error\n: Lines have different lengths\n");
 		return (0);
 	}
 	if (!ft_check_borders(game))
 	{
-		ft_printf("Error: Map borders are not walls\n");
+		ft_printf("Error\n: Map borders are not walls\n");
 		return (0);
 	}
-	if (!validate_flood_fill(game))
+	if (!validate_flood_fill(game, ver))
 	{
-		ft_printf("Error: Flood fill\n");
+		ft_printf("Error\n: Flood fill\n");
 		return (0);
 	}
 	return (1);

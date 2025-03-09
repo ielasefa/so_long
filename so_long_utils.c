@@ -15,7 +15,7 @@
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
@@ -58,7 +58,7 @@ void	free_animation(t_vars *game)
 	int	i;
 
 	i = 0;
-	while (i < 7)
+	while (i < 5)
 	{
 		if (game->animation[i])
 			mlx_destroy_image(game->mlx, game->animation[i]);
@@ -66,9 +66,9 @@ void	free_animation(t_vars *game)
 	}
 }
 
-void	handle_player(t_vars *game, int *play, int x, int y)
+void	handle_player(t_vars *game, t_verification *ver, int x, int y)
 {
-	(*play)++;
+	ver->player++;
 	game->player_x = y;
 	game->player_y = x;
 }
