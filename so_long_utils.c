@@ -53,19 +53,6 @@ int	close_window(t_vars *game)
 	return (0);
 }
 
-void	free_animation(t_vars *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < 5)
-	{
-		if (game->animation[i])
-			mlx_destroy_image(game->mlx, game->animation[i]);
-		i++;
-	}
-}
-
 void	handle_player(t_vars *game, t_verification *ver, int x, int y)
 {
 	ver->player++;

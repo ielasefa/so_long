@@ -35,7 +35,6 @@ typedef struct s_vars
 	void	*img_coin;
 	void	*img_win;
 	void	*img_home;
-	void	*animation[5];
 	int		width;
 	int		height;
 	int		player_x;

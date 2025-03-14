@@ -34,7 +34,7 @@ int	load_images(t_vars *game, int *width, int *height)
 			width, height);
 	game->img_wall = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm", width,
 			height);
-	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/01.xpm", width,
+	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/05.xpm", width,
 			height);
 	game->img_coin = mlx_xpm_file_to_image(game->mlx, "assets/02.xpm", width,
 			height);
