@@ -80,17 +80,17 @@ int	verification_map(t_vars *game, t_verification *ver)
 	ver->player = 0;
 	if (!game->map || !game->map[0])
 	{
-		ft_printf("Error\n: Empty map\n");
+		ft_printf("Error\nEmpty map\n");
 		return (0);
 	}
 	if (!ft_check_map_chars(game, ver))
 	{
-		ft_printf("Error\n: Invalid characters found\n");
+		ft_printf("Error\nInvalid characters found\n");
 		return (0);
 	}
 	if (ver->player != 1 || ver->exit != 1 || ver->collect < 1)
 	{
-		ft_printf("Error\n: Wrong number of elements\n");
+		ft_printf("Error\nWrong number of elements\n");
 		return (0);
 	}
 	return (verification_map_2(game, ver));
@@ -100,22 +100,22 @@ int	verification_map_2(t_vars *game, t_verification *ver)
 {
 	if (game->height > 32 || game->width > 60)
 	{
-		ft_printf("Error\n Lines > 32 height || line > 60 widht \n");
+		ft_printf("Error\nLines > 32 height || line > 60 widht \n");
 		return (0);
 	}
 	if (!ft_check_line(game))
 	{
-		ft_printf("Error\n Lines have different lengths\n");
+		ft_printf("Error\nLines have different lengths\n");
 		return (0);
 	}
 	if (!ft_check_borders(game))
 	{
-		ft_printf("Error\n Map borders are not walls\n");
+		ft_printf("Error\nMap borders are not walls\n");
 		return (0);
 	}
 	if (!validate_flood_fill(game, ver))
 	{
-		ft_printf("Error\n in Flood fill\n");
+		ft_printf("Error\nFlood fill\n");
 		return (0);
 	}
 	return (1);

@@ -26,9 +26,11 @@ char	*add_line(char *all_lines, char *line)
 
 void	free_resources(char *all_lines, char *line)
 {
-	//free(free_static(NULL));
-	free(all_lines);
-	free(line);
+	free(free_static(NULL));
+	if (all_lines)
+		free(all_lines);
+	if (line)
+		free(line);
 }
 
 char	**get_maps(int fd)
@@ -43,7 +45,8 @@ char	**get_maps(int fd)
 	{
 		if (line[0] == '\n')
 		{
-			free_resources(all_lines, line);
+			free(line);
+			free(all_lines);
 			return (NULL);
 		}
 		all_lines = add_line(all_lines, line);
