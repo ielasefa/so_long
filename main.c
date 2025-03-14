@@ -28,15 +28,15 @@ int	create_window(t_vars *game)
 
 int	load_images(t_vars *game, int *width, int *height)
 {
-	game->img_player = mlx_xpm_file_to_image(game->mlx, "assets/01.xpm", width,
+	game->img_player = mlx_xpm_file_to_image(game->mlx, "assets/011.xpm", width,
 			height);
 	game->img_floor = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm",
 			width, height);
 	game->img_wall = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm", width,
 			height);
-	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/exit1.xpm", width,
+	game->img_home = mlx_xpm_file_to_image(game->mlx, "assets/01.xpm", width,
 			height);
-	game->img_coin = mlx_xpm_file_to_image(game->mlx, "assets/001.xpm", width,
+	game->img_coin = mlx_xpm_file_to_image(game->mlx, "assets/02.xpm", width,
 			height);
 	if (!game->img_player || !game->img_floor || !game->img_wall
 		|| !game->img_coin || !game->img_home)
@@ -72,12 +72,6 @@ int	init_game(t_vars *game, t_verification *ver, int fd)
 	return (1);
 }
 
-void	initialize_game(t_vars *game)
-{
-	animation_image(game);
-	render_map(game);
-}
-
 int	main(int ac, char **av)
 {
 	t_vars			game;
@@ -99,10 +93,9 @@ int	main(int ac, char **av)
 		return (1);
 	if (!load_images(&game, &width, &height))
 		return (1);
-	initialize_game(&game);
+	render_map(&game);
 	mlx_key_hook(game.win, handle_key, &game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
-	mlx_loop_hook(game.mlx, animation_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

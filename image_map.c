@@ -31,7 +31,7 @@ void	render_tile(t_vars *game, int x, int y)
 			* TILE_SIZE, y * TILE_SIZE);
 	}
 	else if (game->map[y][x] == 'C')
-		mlx_put_image_to_window(game->mlx, game->win, game->img_floor, x
+		mlx_put_image_to_window(game->mlx, game->win, game->img_coin, x
 			* TILE_SIZE, y * TILE_SIZE);
 }
 
@@ -51,20 +51,6 @@ void	render_map(t_vars *game)
 		}
 		y++;
 	}
-	render_player(game);
-}
-
-void	render_player(t_vars *game)
-{
-	char	*move;
-
 	mlx_put_image_to_window(game->mlx, game->win, game->img_player,
 		game->player_x * TILE_SIZE, game->player_y * TILE_SIZE);
-	move = ft_itoa(game->move_nb);
-	if (move)
-	{
-		mlx_string_put(game->mlx, game->win, 50, 50, 0xFFFFFF, "Move: ");
-		mlx_string_put(game->mlx, game->win, 100, 50, 0xFFFFFF, move);
-		free(move);
-	}
 }

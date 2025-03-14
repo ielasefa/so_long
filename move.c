@@ -18,16 +18,16 @@ int	handle_key(int keycode, void *param)
 	t_vars	*game;
 
 	game = (t_vars *)param;
-	if ((keycode == 119 || keycode == 65362)
+	if ((keycode == 119 )
 		&& game->map[game->player_y - 1][game->player_x] != '1')
 		move_player(game, -1, 0);
-	else if ((keycode == 115 || keycode == 65364)
+	else if ((keycode == 115)
 		&& game->map[game->player_y + 1][game->player_x] != '1')
 		move_player(game, 1, 0);
-	else if ((keycode == 97 || keycode == 65361)
+	else if ((keycode == 97 )
 		&& game->map[game->player_y][game->player_x - 1] != '1')
 		move_player(game, 0, -1);
-	else if ((keycode == 100 || keycode == 65363)
+	else if ((keycode == 100)
 		&& game->map[game->player_y][game->player_x + 1] != '1')
 		move_player(game, 0, 1);
 	else if (keycode == 65307)

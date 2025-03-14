@@ -24,15 +24,6 @@ char	*add_line(char *all_lines, char *line)
 	return (temp);
 }
 
-void	free_resources(char *all_lines, char *line)
-{
-	free(free_static(NULL));
-	if (all_lines)
-		free(all_lines);
-	if (line)
-		free(line);
-}
-
 char	**get_maps(int fd)
 {
 	char	*line;

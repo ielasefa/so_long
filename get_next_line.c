@@ -97,15 +97,6 @@ char	*clean_storage(char *storage)
 	return (cpy);
 }
 
-void	*free_static(void *ptr)
-{
-	static char	*pt;
-
-	if (ptr)
-		pt = ptr;
-	return (pt);
-}
-
 char	*get_next_line(int fd)
 {
 	static char	*storage;
@@ -120,6 +111,5 @@ char	*get_next_line(int fd)
 		return (free(storage), storage = NULL, NULL);
 	}
 	storage = clean_storage(storage);
-	free_static(storage);
 	return (line);
 }

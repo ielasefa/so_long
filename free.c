@@ -24,7 +24,7 @@ void	ft_exit(t_vars *game)
 		mlx_destroy_image(game->mlx, game->img_coin);
 	if (game->img_home)
 		mlx_destroy_image(game->mlx, game->img_home);
-	free_animation(game);
+		//free_animation(game);
 	ft_free_map(game);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
